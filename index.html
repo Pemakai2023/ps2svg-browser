@@ -1,0 +1,40 @@
+<html>
+  <head>
+  <head>
+  <body>
+  
+    <script type="module">
+    import SVG from "./lib/ps2svg.js"
+    import cli from "./lib/cli.js";
+    import save_svg from './lib/save-svg.js'
+    
+   
+    var getfile = window.location.search.substr(1)||'./ps_files/file'
+    var splitGetFile = getfile.split('/')
+    var fileName = splitGetFile[splitGetFile.length-1]
+    const arg_v = [getfile, fileName];
+    const { inputName, outputName } = cli(arg_v);
+    
+    
+    const res = await fetch(`${inputName}.ps`);
+    const buffer = await res.text()
+    
+    const svg = SVG(buffer)
+    
+    
+    document.body.innerHTML += svg
+    
+    var button = document.getElementsByTagName('button')
+    var save 
+    for(var k of button) {
+      if(k.textContent === "Save") {
+        save = k
+      }
+    }
+    save.onclick = function() {
+      return save_svg(svg, outputName+'.svg')
+    }
+    </script>
+    <button>Save</button>
+  </body>
+</html>
