@@ -9,6 +9,12 @@ npm i -g ps2svg
 ```
 
 ## Usage
+```
+for browser:
+index.html?./ps_files/file
+or
+index.html?./ps_files/file.ps
+```
 
 ```bash
 # (.ps | .svg)? is optional
